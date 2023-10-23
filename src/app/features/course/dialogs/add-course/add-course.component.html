@@ -1,0 +1,64 @@
+<div class="card">
+    <p-table
+        #courseTable
+        [value]="studentCourses"
+        [paginator]="true"
+        [rows]="5"
+        [showCurrentPageReport]="true"
+        [tableStyle]="{ 'min-width': '20rem' }"
+        currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} registros"
+        [rowsPerPageOptions]="[10, 25, 50]"
+        [globalFilterFields]="['id', 'name']"
+    >
+        <ng-template pTemplate="caption">
+            <div class="caption-flex">
+                <span class="p-input-icon-left ml-auto">
+                    <i class="pi pi-search"></i>
+                    <input
+                        type="text"
+                        pInputText
+                        (input)="courseTable.filterGlobal(
+                            $any($event.target).value, 'contains')" 
+                        placeholder="Filtrar"/>
+                </span>
+                
+                <form [formGroup]="formGroup">
+                    <div class="select-flex">
+                        <p-dropdown [options]="availableCourses" formControlName="selectedAvailableCourse" optionLabel="name" [filter]="true" filterBy="name" [showClear]="true" placeholder="Seleccione el curso">
+                            <ng-template pTemplate="selectedItem">
+                                <div class="flex align-items-center gap-2" *ngIf="formGroup?.get('selectedAvailableCourse')">
+                                    <div>{{ formGroup.get('selectedAvailableCourse')?.value.name }}</div>
+                                </div>
+                            </ng-template>
+                            <ng-template let-country pTemplate="item">
+                                <div class="flex align-items-center gap-2">
+                                    <div>{{ country.name }}</div>
+                                </div>
+                            </ng-template>
+                        </p-dropdown>
+                    
+                        <p-button icon="pi pi-plus" (click)="registerCourse()"></p-button>
+                    </div>
+                </form>
+            </div>
+        </ng-template>
+    
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width:25%">Id</th>
+                <th style="width:25%">Nombre</th>
+                <th style="width:25%">Acciones</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-course>
+            <tr>
+                <td>{{ course.id }}</td>
+                <td>{{ course.name }}</td>
+                <td><p-button icon="pi pi-trash" severity="danger" (click)="removeCourse(course.id, $event)"></p-button></td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+
+<p-toast></p-toast>
+<p-confirmPopup></p-confirmPopup>

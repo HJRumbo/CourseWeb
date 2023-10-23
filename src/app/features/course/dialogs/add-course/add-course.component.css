@@ -1,0 +1,16 @@
+.select-flex {
+    display: flex;
+    gap: 10px;
+}
+
+.caption-flex {
+    display: flex;
+    justify-content: space-between;
+}
+
+/*Small*/
+@media screen and (max-width: 768px) {
+    .caption-flex {
+        flex-direction: column;
+    }
+}

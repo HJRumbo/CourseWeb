@@ -1,1 +1,16 @@
-/* You can add global styles to this file, and also import other style files */
+.container {
+    padding: 60px;
+}
+
+@media screen and (max-width: 1024px) {
+    .container {
+        padding: 10px;
+    }
+}
+
+/*Small*/
+@media screen and (max-width: 768px) {
+    .container {
+        padding: 10px 0;
+    }
+}
