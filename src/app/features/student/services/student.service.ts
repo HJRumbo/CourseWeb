@@ -21,11 +21,11 @@ export class StudentService {
     return this.http.get<Student[]>(`${this.baseUrl}/Student`);
   }
 
-  registerCourse(studentId: number, courseId: number):Observable<boolean>{
-    return this.http.put<boolean>(`${this.baseUrl}/Student/RegisterCourse`, {studentId, courseId});
+  registerCourse(studentId: number, courseId: number):Observable<Response<boolean>>{
+    return this.http.put<Response<boolean>>(`${this.baseUrl}/Student/RegisterCourse`, {studentId, courseId});
   }
 
-  removeCourse(studentId: number, courseId: number):Observable<boolean>{
-    return this.http.put<boolean>(`${this.baseUrl}/Student/RemoveCourse`, {studentId, courseId});
+  removeCourse(studentId: number, courseId: number):Observable<Response<boolean>>{
+    return this.http.put<Response<boolean>>(`${this.baseUrl}/Student/RemoveCourse`, {studentId, courseId});
   }
 }

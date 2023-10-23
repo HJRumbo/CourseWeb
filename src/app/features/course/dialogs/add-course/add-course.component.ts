@@ -58,9 +58,9 @@ export class AddCourseComponent implements OnInit {
     
     let selectedAvailableCourse = this.formGroup?.get('selectedAvailableCourse')?.value;
 
-    this.studentService.registerCourse(this.student.id, selectedAvailableCourse.id).subscribe(registered => {
-      if(registered) {
-        this.messageService.add({ severity: 'info', summary: 'Confirmado', detail: 'El estudiante ha sido registrado en el curso.' });
+    this.studentService.registerCourse(this.student.id, selectedAvailableCourse.id).subscribe(response => {
+      if(response) {
+        this.messageService.add({ severity: 'info', summary: 'Confirmado', detail: response.message });
         this.getCoursesByStudentId();   
         this.getAvailableCourses();   
       }
@@ -74,9 +74,9 @@ export class AddCourseComponent implements OnInit {
         icon: 'pi pi-exclamation-triangle',
         acceptLabel: 'Sí',
         accept: () => {
-          this.studentService.removeCourse(this.student.id, courseId).subscribe(removed => {
-            if(removed) {
-              this.messageService.add({ severity: 'info', summary: 'Confirmado', detail: 'El estudiante ha sido removido del curso.' });
+          this.studentService.removeCourse(this.student.id, courseId).subscribe(response => {
+            if(response) {
+              this.messageService.add({ severity: 'info', summary: 'Confirmado', detail: response.message });
               this.getCoursesByStudentId();
               this.getAvailableCourses();   
             }
